@@ -8,7 +8,7 @@ namespace MyBoard\Api\V10\Models{
 
 use MyBoard\Api\Shared\Interfaces\DAL;
 use MyBoard\Api\Shared\Database;
-use MyBoard\Api\V10\Models\User;
+use MyBoard\Api\Shared\Interfaces\Model;
 use Exception;
 
 	 class UserDAL implements DAL{
@@ -27,7 +27,7 @@ use Exception;
 		}
 		
 		
-		public function insert($model){
+		public function insert(Model $model){
 			try
 			{
 				$stmt = Database::getConnection()->prepare('INSERT INTO '.self::TAB_NAME.' '.self::INSERT_COLS.' ');
@@ -42,11 +42,11 @@ use Exception;
 				return $stmt->rowCount();
 				
 			} catch(Exception $e) {
-				// Gestisci eccezione
+				//Aggiungere sistema di Log per gestione errori
 				return 0;
 			}
 		}
-		public function update($model){
+		public function update(Model $model){
 			try
 			{
 				$stmt = Database::getConnection()->prepare('UPDATE '.self::TAB_NAME.' '.self::UPDATE_COLS.' '.self::UPDATE_WHERE);
@@ -62,21 +62,24 @@ use Exception;
 				return $stmt->rowCount();
 				
 			} catch(Exception $e) {
-				// Gestisci eccezione
+				//Aggiungere sistema di Log per gestione errori
 				return 0;
 			}	
 		}
 		public function find($filters){
 			try
 			{
+				$and = '';
+				if(!empty($filters))
+					$and = ' AND ';
 				//CAMBIARE LOGICA DI BINDING DEI FILTRI (Array)
-				$stmt = Database::getConnection()->prepare('SELECT * FROM '.self::TAB_NAME.' WHERE '.$filters. ' 1 = 1');
+				$stmt = Database::getConnection()->prepare('SELECT * FROM '.self::TAB_NAME.' WHERE '.$filters.$and. ' 1 = 1');
 			
 				$stmt->execute();				
 				return $stmt->fetchAll(Database::FETCH_CLASS, 'MyBoard\Api\V10\Models\User');
 				
 			} catch(Exception $e) {
-				
+				//Aggiungere sistema di Log per gestione errori
 				return null;
 			}
 		}
@@ -90,12 +93,12 @@ use Exception;
 				return $stmt->fetchObject('MyBoard\Api\V10\Models\User');
 				
 			} catch(Exception $e) {
-				
+				//Aggiungere sistema di Log per gestione errori
 				return null;
 			}
 		}
 		
-		public function delete($model){
+		public function delete(Model $model){
 			try
 			{
 				$stmt = Database::getConnection()->prepare('UPDATE '.self::TAB_NAME.' '.self::DELETE_SET.' '.self::DELETE_WHERE);
@@ -106,7 +109,7 @@ use Exception;
 				return $stmt->rowCount();
 				
 			} catch(Exception $e) {
-				// Gestisci eccezione
+				//Aggiungere sistema di Log per gestione errori
 				return 0;
 			}	
 		}

@@ -6,6 +6,8 @@
  */
 namespace MyBoard\Api\Shared\Interfaces{
 
+use MyBoard\Api\Shared\Interfaces\Model;
+
 	 interface DAL{
 		
 		/**
@@ -14,14 +16,14 @@ namespace MyBoard\Api\Shared\Interfaces{
 		 * @param Model the element to insert
 		 * @return the inserted element
 		 */
-		public function insert($model);
+		public function insert(Model $model);
 		/**
 		 * Updates a Model record into DB table
 		 *
 		 * @param Model the element to update
 		 * @return the updated element
 		 */
-		public function update($model);
+		public function update(Model $model);
 		
 		/**
 		 * Finds a List of Model records from DB table
@@ -43,7 +45,7 @@ namespace MyBoard\Api\Shared\Interfaces{
 		 * @param Model the element to delete
 		 * @return boolean operation status
 		 */
-		public function delete($model);
+		public function delete(Model $model);
 		
 	 }
  
