@@ -17,4 +17,4 @@ This project will cover the following points:
 
 Agostino Manzi
 
-I'm a newbie to tese technology, so this project could contain some error or non optimal solutions.
+I'm a newbie to these technology, so this project could contain some error or non optimal solutions.
