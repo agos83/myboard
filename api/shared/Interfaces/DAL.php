@@ -1,7 +1,7 @@
 <?php
 /**
  * Interface for Data Access Layer class
- * 
+ *
  * @author Agostino G. Manzi
  */
 namespace MyBoard\Api\Shared\Interfaces{
@@ -9,46 +9,47 @@ namespace MyBoard\Api\Shared\Interfaces{
 use MyBoard\Api\Shared\Interfaces\Model;
 
 	 interface DAL{
-		
+
 		/**
 		 * Stores a Model record into DB table
 		 *
 		 * @param Model the element to insert
-		 * @return the inserted element
+         * @return Model the inserted element
 		 */
 		public function insert(Model $model);
 		/**
 		 * Updates a Model record into DB table
 		 *
 		 * @param Model the element to update
-		 * @return the updated element
+         * @return Model the updated element
 		 */
 		public function update(Model $model);
-		
+
 		/**
 		 * Finds a List of Model records from DB table
 		 *
-		 * @param the filters to apply
-		 * @return the element
+		 * @param string the filters to apply
+         * @return Array the elements
 		 */
 		public function find($filters);
 		/**
 		 * Get a single Model instance
 		 *
-		 * @param record id
+		 * @param string record id
 		 * @return Model Instance
 		 */
 		public function get($id);
-		/**
+		
+        /**
 		 * Deletes a Model from DB Table
 		 *
 		 * @param Model the element to delete
-		 * @return boolean operation status
+		 * @return int operation status
 		 */
 		public function delete(Model $model);
-		
+
 	 }
- 
+
  }
 
 ?>

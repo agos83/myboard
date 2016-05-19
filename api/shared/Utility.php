@@ -58,10 +58,10 @@ namespace MyBoard\Api\Shared{
             try{
 
                 $secretKey = base64_decode(SECRET);
-                $token = JWT::decode($jwt, $secretKey, array('HS512'));
+                $token = JWT::decode($token, $secretKey, array('HS512'));
                 return true;
             }
-            catch(SignatureInvalidException ex){
+            catch(SignatureInvalidException $ex){
                 return false;
             }
         }

@@ -22,14 +22,15 @@ use Exception;
 		/**
 		 * Create a new User Account in the system
 		 *
-		 * @param username of the element to insert
-		 * @param password of the element to insert
-		 * @return the inserted element
+		 * @param string username of the element to insert
+		 * @param string password of the element to insert
+		 * @return User inserted element
 		 */
 		public function register($username, $password)
 		{
+            $user = new User();
 			try{
-				$user = new User();
+
 				$user->username = $username;
 				//la password arriverà come MD5 della password originale
 				$user->password = $password;
@@ -53,7 +54,7 @@ use Exception;
 					return $user;
 				}
 
-				$userArr = $userDAL->find(' username='.$username);
+				$userArr = $userDAL->find(' username='.$username.' AND valid=1 ');
 				if($userArr == null || count($userArr)!=1)
 				{
 					$user -> setOutcome(Utility::OUTC_ERROR,'03 - An error occurred while saving your data. Try again later.', null);
@@ -64,9 +65,9 @@ use Exception;
 				$user -> setOutcome(Utility::OUTC_INFO,'Success.', null);
 				return $user;
 			}
-			catch (Exception ex){
+			catch (Exception $ex){
 				//Aggiungere sistema di Log per gestione errori
-				$user -> setOutcome(Utility::OUTC_EXCEPTION,'04 - An error occurred while saving your data. Try again later.', ex);
+				$user -> setOutcome(Utility::OUTC_EXCEPTION,'04 - An error occurred while saving your data. Try again later.', $ex);
 				return $user;
 			}
 		}
@@ -74,19 +75,20 @@ use Exception;
 		/**
 		 * Activates new User Account in the system
 		 *
-		 * @param username of the element to insert
-		 * @param key a unique security key
-		 * @return the inserted element
+         * @param string username of the element to insert
+         * @param string key a unique security key
+         * @return User the inserted element
 		 */
 		public function activate($username, $key)
 		{
+            $user = new User();
 			try{
-				$user = new User();
+
 
 				$userDAL = new UserDAL();
 
 				//aggiungere sanitize degli argomenti passati dall'esterno (injection)
-				$foundUsr = $userDAL->find(' username='.$username.' AND valid=1 AND active=0 ');
+				$userArr = $userDAL->find(' username='.$username.' AND valid=1 AND active=0 ');
 
 				if($userArr == null || count($userArr)!=1)
 				{
@@ -104,9 +106,9 @@ use Exception;
 				$user -> setOutcome(Utility::OUTC_INFO,'Success.', null);
 				return $user;
 			}
-			catch (Exception ex){
+			catch (Exception $ex){
 				//Aggiungere sistema di Log per gestione errori
-				$user -> setOutcome(Utility::OUTC_EXCEPTION,'04 - An error occurred while saving your data. Try again later.', ex);
+				$user -> setOutcome(Utility::OUTC_EXCEPTION,'04 - An error occurred while saving your data. Try again later.', $ex);
 				return $user;
 			}
 		}
@@ -114,19 +116,20 @@ use Exception;
 		/**
 		 * Check the login for the user and returns a key
 		 *
-		 * @param username of the user to login
-		 * @param password of the user to login
-		 * @return an authentication key that can be used by the caller
+		 * @param string username of the user to login
+         * @param string password of the user to login
+		 * @return User an authentication key that can be used by the caller
 		 */
 		public function login($username, $password)
 		{
+            $user = new User();
 			try{
-				$user = new User();
+
 
 				$userDAL = new UserDAL();
 
 				//aggiungere sanitize degli argomenti passati dall'esterno (injection)
-				$foundUsr = $userDAL->find(' username='.$username.' AND password='.$password.' AND valid = 1 AND active = 1 ');
+				$userArr = $userDAL->find(' username='.$username.' AND password='.$password.' AND valid = 1 AND active = 1 ');
 
 				if($userArr == null || count($userArr)!=1)
 				{
@@ -134,6 +137,7 @@ use Exception;
 					return $user;
 				}
 
+                $user = $userArr[0];
 				//integrata la generazione del token JWT
 				$user->JWT = Utility::createToken($user->id);
 
@@ -141,9 +145,9 @@ use Exception;
 				$user -> setOutcome(Utility::OUTC_INFO,'Success.', null);
 				return $user;
 			}
-			catch (Exception ex){
+			catch (Exception $ex){
 				//Aggiungere sistema di Log per gestione errori
-				$user -> setOutcome(Utility::OUTC_EXCEPTION,'04 - An error occurred while saving your data. Try again later.', ex);
+				$user -> setOutcome(Utility::OUTC_EXCEPTION,'04 - An error occurred while saving your data. Try again later.', $ex);
 				return $user;
 			}
 		}
@@ -152,12 +156,13 @@ use Exception;
 		 * Check the key validity, to be used to authenticate API calls
 		 * this will not be exposed as an API
 		 *
-		 * @param the key to match
-		 * @return an authentication key that can be used by the caller
+         * @param string the user id
+         * @param string the key to match
+		 * @return int 1 if allowed 0 otherwise
 		 */
 		public function verifyAuthKey($userdId, $jwt)
 		{
-            
+
 
             return 0;
 		}
@@ -165,19 +170,21 @@ use Exception;
 		/**
 		 * Updates a user Account
 		 *
-		 * @param user the element to update
-		 * @return the updated element
+		 * @param User the element to update
+		 * @return User the updated element
 		 */
 		public function update($user)
 		{
+            $user = new User();
 
+            return $user;
 		}
 
 		/**
 		 * Deletes a user Account
 		 *
-		 * @param user the element to delete
-		 * @return 1 if ok 0 if errors
+         * @param User user the element to delete
+		 * @return int 1 if ok 0 if errors
 		 */
 		public function delete($user)
 		{

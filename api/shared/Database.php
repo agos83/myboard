@@ -43,7 +43,7 @@ use PDO;
 		/**
 		 * Get a singleton instance of DB Manager
 		 *
-		 * @return DB Manager Instance
+		 * @return Database DB Manager Instance
 		 */
 		public static function getInstance(){
 			if(self::$connection === null){

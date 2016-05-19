@@ -5,8 +5,9 @@
  * @author Agostino G. Manzi
  */
 namespace MyBoard\Middleware;
+use Slim;
 
- class Authenticaition extends \Slim\Middleware{
+ class Authenticaition extends Middleware{
 	
 	
 	function __construct() {        
