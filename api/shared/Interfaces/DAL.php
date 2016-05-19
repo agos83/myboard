@@ -13,14 +13,14 @@ use MyBoard\Api\Shared\Interfaces\Model;
 		/**
 		 * Stores a Model record into DB table
 		 *
-		 * @param Model the element to insert
+         * @param Model $model the element to insert
          * @return Model the inserted element
 		 */
 		public function insert(Model $model);
 		/**
 		 * Updates a Model record into DB table
 		 *
-		 * @param Model the element to update
+         * @param Model $model the element to update
          * @return Model the updated element
 		 */
 		public function update(Model $model);
@@ -28,22 +28,22 @@ use MyBoard\Api\Shared\Interfaces\Model;
 		/**
 		 * Finds a List of Model records from DB table
 		 *
-		 * @param string the filters to apply
+         * @param string $filters the filters to apply
          * @return Array the elements
 		 */
 		public function find($filters);
 		/**
 		 * Get a single Model instance
 		 *
-		 * @param string record id
+         * @param string $id record id
 		 * @return Model Instance
 		 */
 		public function get($id);
-		
+
         /**
 		 * Deletes a Model from DB Table
 		 *
-		 * @param Model the element to delete
+         * @param Model $model the element to delete
 		 * @return int operation status
 		 */
 		public function delete(Model $model);

@@ -22,8 +22,8 @@ use Exception;
 		/**
 		 * Create a new User Account in the system
 		 *
-		 * @param string username of the element to insert
-		 * @param string password of the element to insert
+		 * @param string $username of the element to insert
+		 * @param string $password of the element to insert
 		 * @return User inserted element
 		 */
 		public function register($username, $password)
@@ -75,8 +75,8 @@ use Exception;
 		/**
 		 * Activates new User Account in the system
 		 *
-         * @param string username of the element to insert
-         * @param string key a unique security key
+         * @param string $username of the element to insert
+         * @param string $key a unique security key
          * @return User the inserted element
 		 */
 		public function activate($username, $key)
@@ -116,8 +116,8 @@ use Exception;
 		/**
 		 * Check the login for the user and returns a key
 		 *
-		 * @param string username of the user to login
-         * @param string password of the user to login
+         * @param string $username of the user to login
+         * @param string $password of the user to login
 		 * @return User an authentication key that can be used by the caller
 		 */
 		public function login($username, $password)
@@ -156,8 +156,8 @@ use Exception;
 		 * Check the key validity, to be used to authenticate API calls
 		 * this will not be exposed as an API
 		 *
-         * @param string the user id
-         * @param string the key to match
+         * @param string $userdId the user id
+         * @param string $jwt the key to match
 		 * @return int 1 if allowed 0 otherwise
 		 */
 		public function verifyAuthKey($userdId, $jwt)
@@ -170,7 +170,7 @@ use Exception;
 		/**
 		 * Updates a user Account
 		 *
-		 * @param User the element to update
+         * @param User $user the element to update
 		 * @return User the updated element
 		 */
 		public function update($user)
@@ -183,7 +183,7 @@ use Exception;
 		/**
 		 * Deletes a user Account
 		 *
-         * @param User user the element to delete
+         * @param User $user user the element to delete
 		 * @return int 1 if ok 0 if errors
 		 */
 		public function delete($user)

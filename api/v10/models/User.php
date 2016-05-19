@@ -42,18 +42,20 @@ use Exception;
          */
 		public function getOutcome(){
 
-			return $outc;
+			return $this->outc;
 		}
 
 		/**
-		 * set Outcome of operations involving the Model instance
-		 *
-		 *
-         * @return Outcome the outcome
-		 */
+         * set Outcome of operations involving the Model instance
+         *
+         * @param string $type the outcome: 'INFO', 'WARNING', 'ERROR', 'EXCEPTION'
+         * @param string $message the outcome message
+         * @param \Exception $exception the exception when present
+         * @return void
+         */
 		public function setOutcome($type, $message, $exception){
 
-			$outc = new Outcome($type, $message, $exception);
+			$this->outc = new Outcome($type, $message, $exception);
 
 		}
 

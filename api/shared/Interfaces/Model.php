@@ -21,10 +21,10 @@ use Exception;
 		/**
 		 * set Outcome of operations involving the Model instance
 		 *
-         * @param string type the outcome: 'INFO', 'WARNING', 'ERROR', 'EXCEPTION'
-         * @param string message the outcome message
-		 * @param Exception exception the exception when present
-		 * @return Outcome the outcome
+         * @param string $type the outcome: 'INFO', 'WARNING', 'ERROR', 'EXCEPTION'
+         * @param string $message the outcome message
+         * @param Exception $exception the exception when present
+		 * @return void
 		 */
 		public function setOutcome($type, $message, $exception);
 	 }
