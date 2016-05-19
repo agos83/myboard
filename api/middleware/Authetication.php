@@ -4,7 +4,7 @@
  *
  * @author Agostino G. Manzi
  */
-namespace MyBoard\Middleware;
+namespace MyBoard\Api\Middleware;
 
  class Authentication {
 

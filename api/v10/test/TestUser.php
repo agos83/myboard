@@ -1,6 +1,6 @@
 <?php
 /**
- * TEST class for User model
+ * TEST for User model
  *
  * @author Agostino G. Manzi
  */
@@ -8,9 +8,9 @@
 require '../../vendor/autoload.php';
 use MyBoard\Api\V10\Models\User;
 use MyBoard\Api\V10\Models\UserDAL;
+
 echo 'START'.'<br/>';
 
-echo base64_encode(openssl_random_pseudo_bytes(64)).'<br/>';
 
 
 $usr = new User();

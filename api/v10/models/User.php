@@ -13,7 +13,7 @@ use Exception;
 	 class User implements Model{
 
 		public function __construct(){
-			$this->outc = new Outcome('','',null);
+
 		}
 
 		public $username = "";
@@ -32,7 +32,7 @@ use Exception;
 
 		public $JWT = "";
 
-		private $outc;
+		private $outc = null;
 
 		/**
 		 * get Outcome of operations involving the Model instance
@@ -55,12 +55,16 @@ use Exception;
          */
 		public function setOutcome($type, $message, $exception){
 
-			$this->outc = new Outcome($type, $message, $exception);
+			$this->outc =  new Outcome($type, $message, $exception);
+		}
 
+        public function setOutcome2($outcome){
+
+			$this->outc =  $outcome;
 		}
 
 	 }
 
- }
+}
 
 ?>

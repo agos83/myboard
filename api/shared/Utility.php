@@ -5,10 +5,12 @@
  * @author Agostino G. Manzi
  */
 namespace MyBoard\Api\Shared{
+    require_once 'Conf.php';
     use Firebase\JWT\JWT;
     use Firebase\JWT\ExpiredException;
     use Firebase\JWT\BeforeValidException;
     use Firebase\JWT\SignatureInvalidException;
+    use MyBoard\Api\Shared\Outcome;
 
 	 class Utility{
 
@@ -16,6 +18,8 @@ namespace MyBoard\Api\Shared{
 		const OUTC_ERROR = 'ERROR';
 		const OUTC_WARNING = 'WARNING';
 		const OUTC_EXCEPTION = 'EXCEPTION';
+
+        const ACTIVATION_URL = 'http://localhost/myboard/api/v10/account/activate';
 
 		public function __construct() {
 
@@ -54,16 +58,26 @@ namespace MyBoard\Api\Shared{
 
 		}
 
-        public static function validateToken($userId, $token){
-            try{
+        public static function getUserIdFromToken($token){
 
-                $secretKey = base64_decode(SECRET);
-                $token = JWT::decode($token, $secretKey, array('HS512'));
-                return true;
-            }
-            catch(SignatureInvalidException $ex){
-                return false;
-            }
+            $secretKey = base64_decode(SECRET);
+            $token = JWT::decode($token, $secretKey, array('HS512'));
+            return $token->data->userId;
+
+        }
+
+        public static function validateToken($token){
+
+            $secretKey = base64_decode(SECRET);
+            $token = JWT::decode($token, $secretKey, array('HS512'));
+            return $token;
+
+        }
+
+        public static function getKey($input){
+
+            return md5($input.SECRET);
+
         }
 
 	 }

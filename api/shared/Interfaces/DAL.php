@@ -48,6 +48,30 @@ use MyBoard\Api\Shared\Interfaces\Model;
 		 */
 		public function delete(Model $model);
 
+
+        /**
+         * Begin Db Transaction
+         *
+         *
+         * @return void
+         */
+		public function beginTransaction();
+
+        /**
+         * Commit Db Transaction
+         *
+         *
+         * @return void
+         */
+		public function commit();
+
+        /**
+         * Rollback Db Transaction
+         *
+         *
+         * @return void
+         */
+		public function rollback();
 	 }
 
  }

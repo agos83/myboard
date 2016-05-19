@@ -38,16 +38,6 @@ CREATE TABLE `users` (
   `dataModifica` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Indici per le tabelle scaricate
---
-
---
--- Indici per le tabelle `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `USERNAME_UQ` (`username`);
 
 --
 -- AUTO_INCREMENT per le tabelle scaricate
