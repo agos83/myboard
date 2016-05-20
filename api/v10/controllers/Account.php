@@ -49,7 +49,7 @@ use Exception;
 
                     $userDAL->rollback();
 					$user->setOutcome(Utility::OUTC_WARNING,'01 - Username already used by someone else, please try another one.', null);
-                                     
+
 					return $user;
 				}
 
@@ -78,7 +78,7 @@ use Exception;
                 $headers = 'From: webmaster@myboard.com' . "\r\n" .
                     'Reply-To: webmaster@myboard.com' . "\r\n" .
                     'X-Mailer: PHP/' . phpversion();
-                echo $key.'<br/>';
+               
                 mail($to, $subject, $message, $headers);
                 $user->JWT = $key;
                 $userDAL->commit();
@@ -185,7 +185,7 @@ use Exception;
 			catch (Exception $ex){
                 $userDAL->rollback();
 				//Aggiungere sistema di Log per gestione errori
-				$user -> setOutcome(Utility::OUTC_EXCEPTION,'04 - An error occurred while saving your data. Try again later.', $ex);
+				$user -> setOutcome(Utility::OUTC_EXCEPTION,'04 - An error occurred while login to the system. Try again later.', $ex);
 				return $user;
 			}
 		}
@@ -282,7 +282,7 @@ use Exception;
          * @param string $userId the id of the account to delete
 		 * @return Outcome opertation outcome
 		 */
-		public function delete($userId)
+		public function delete($userId, $password)
 		{
             $result = new Outcome(Utility::OUTC_INFO, 'Success.', null);
             $userDAL = new UserDAL();
@@ -300,6 +300,7 @@ use Exception;
 
                 $user = new User();
                 $user->id = $userId;
+                $user->password = $password;
 
 				$affected = $userDAL->delete($user);
 

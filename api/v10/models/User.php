@@ -10,7 +10,7 @@ use MyBoard\Api\Shared\Interfaces\Model;
 use MyBoard\Api\Shared\Outcome;
 use Exception;
 
-	 class User implements Model{
+	 class User implements Model, \JsonSerializable{
 
 		public function __construct(){
 
@@ -58,10 +58,24 @@ use Exception;
 			$this->outc =  new Outcome($type, $message, $exception);
 		}
 
-        public function setOutcome2($outcome){
+        /**
+         * set Outcome of operations involving the Model instance
+         *
+         * @param Outcome the instance to set
+         * @return void
+         */
+		public function setOutcomeInstance(Outcome $outcome){
 
-			$this->outc =  $outcome;
+			$this->outc = $outcome;
 		}
+
+
+        public function JsonSerialize()
+        {
+            $vars = get_object_vars($this);
+
+            return $vars;
+        }
 
 	 }
 

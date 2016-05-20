@@ -52,8 +52,7 @@ namespace MyBoard\Api\Shared{
 				'HS512'
 				);
 
-			$unencodedArray = ['jwt' => $jwt];
-			return json_encode($unencodedArray);
+			return $jwt;
 
 
 		}

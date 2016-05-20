@@ -6,7 +6,7 @@
  */
 namespace MyBoard\Api\Shared{
 
-	 class Outcome{
+    class Outcome implements \JsonSerializable{
 
 
 		public function __construct($t, $m, $ex) {
@@ -21,6 +21,12 @@ namespace MyBoard\Api\Shared{
 		public $message="";
 		public $exception=null;
 
+        public function JsonSerialize()
+        {
+            $vars = get_object_vars($this);
+
+            return $vars;
+        }
 	 }
 
  }

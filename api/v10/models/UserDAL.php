@@ -19,7 +19,7 @@ use Exception;
 		const UPDATE_COLS = "SET username = :usr, valid = :valid, active= :active, password = :pwd, dataModifica = NOW() ";
 		const UPDATE_WHERE = "WHERE id = :id";
 		const DELETE_SET = "SET valid = 0";
-		const DELETE_WHERE = "WHERE id = :id";
+		const DELETE_WHERE = "WHERE id = :id AND password = :password";
 
 		public function __construct(){
 
@@ -105,6 +105,7 @@ use Exception;
 				$stmt = Database::getConnection()->prepare('UPDATE '.self::TAB_NAME.' '.self::DELETE_SET.' '.self::DELETE_WHERE);
 
 				$stmt->bindParam(':id', $model->id);
+                $stmt->bindParam(':password', $model->password);
 				$stmt->execute();
 
 				return $stmt->rowCount();

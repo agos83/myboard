@@ -15,6 +15,7 @@ $RECYCLE.BIN/
 *.msp
 *.phpproj
 *.sln
+*.user
 .vs/
 
 # Windows shortcuts
